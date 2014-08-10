@@ -57,7 +57,7 @@ public class CheckInListActivity extends ProgressActivity {
                                        String id = (String) viewHolder.itemView.getTag();
                                        String name = ((TextView) viewHolder.itemView.findViewById(R.id.text)).getText
                                                ().toString();
-                                       CheckInActivity.call(CheckInListActivity.this, id, name);
+                                       CheckInOptionsActivity.call(CheckInListActivity.this, id, name);
                                    }
 
                                    @Override

@@ -38,6 +38,8 @@
         </activity>
         <activity android:name=".activity.CheckInActivity">
         </activity>
+        <activity android:name=".activity.CheckInOptionsActivity">
+        </activity>
         <activity android:name="android.support.wearable.activity.ConfirmationActivity"/>
 
         <service

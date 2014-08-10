@@ -18,7 +18,7 @@ import cz.destil.wearsquare.R;
  */
 public class ActionFragment extends Fragment implements View.OnClickListener {
 
-    private Listener mListener;
+    protected Listener mListener;
 
     public static ActionFragment create(int iconResId, int labelResId, Listener listener) {
         ActionFragment fragment = new ActionFragment();

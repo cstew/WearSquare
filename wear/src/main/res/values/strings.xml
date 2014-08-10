@@ -4,6 +4,8 @@
     <string name="app_name">WearSquare</string>
     <string name="please_connect">Please connect your Wear to your phone.</string>
     <string name="check_in">Check in</string>
+    <string name="check_in_with_rachel">Check in With Rachel</string>
+    <string name="friend_shout">With Rachel</string>
     <string name="checking_in">Checking in …</string>
     <string name="checked_in">Checked in</string>
     <string name="exploring">Exploring</string>

@@ -2,9 +2,11 @@ package cz.destil.wearsquare.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.wearable.activity.ConfirmationActivity;
 import android.support.wearable.view.DelayedConfirmationView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -37,6 +39,15 @@ public class CheckInActivity extends BaseActivity {
         activity.startActivity(intent);
     }
 
+    public static void call(Activity activity, String venueId, String venueName, String shout, String mentions) {
+        Intent intent = new Intent(activity, CheckInActivity.class);
+        intent.putExtra("VENUE_ID", venueId);
+        intent.putExtra("VENUE_NAME", venueName);
+        intent.putExtra("SHOUT", shout);
+        intent.putExtra("MENTIONS", mentions);
+        activity.startActivity(intent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -63,7 +74,20 @@ public class CheckInActivity extends BaseActivity {
             @Override
             public void onTimerFinished(View view) {
                 if (!mTimerSelected) {
-                    teleport().sendMessage("check-in/" + getIntent().getStringExtra("VENUE_ID"), null);
+                    String shout = getIntent().getStringExtra("SHOUT");
+                    String mentions = getIntent().getStringExtra("MENTIONS");
+                    Uri.Builder builder = new Uri.Builder()
+                            .scheme("check-in")
+                            .appendPath(getIntent().getStringExtra("VENUE_ID"));
+
+                    if (!TextUtils.isEmpty(shout)) {
+                        builder
+                                .appendPath(shout)
+                                .appendPath(mentions);
+                    }
+
+                    String uri = builder.build().toString();
+                    teleport().sendMessage(uri, null);
                     Intent i = new Intent(CheckInActivity.this, ConfirmationActivity.class);
                     i.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE, ConfirmationActivity.SUCCESS_ANIMATION);
                     i.putExtra(ConfirmationActivity.EXTRA_MESSAGE, getString(R.string.checked_in));
